@@ -4668,6 +4668,8 @@ Function Execute-ProcessAsUser {
 	- LeastPrivilege: Tasks run by using the least-privileged user account (LUA) privileges.
 .PARAMETER Wait
 	Wait for the process, launched by the scheduled task, to complete execution before accepting more input. Default is $false.
+.PARAMETER Hidden
+	Hide the process, launched by the scheduled task. Default is $false.
 .PARAMETER PassThru
 	Returns the exit code from this function or the process launched by the scheduled task.
 .PARAMETER ContinueOnError
@@ -4701,6 +4703,9 @@ Function Execute-ProcessAsUser {
 		[Parameter(Mandatory=$false)]
 		[ValidateNotNullOrEmpty()]
 		[switch]$Wait = $false,
+		[Parameter(Mandatory=$false)]
+		[ValidateNotNullOrEmpty()]
+		[switch]$Hidden = $false,
 		[Parameter(Mandatory=$false)]
 		[switch]$PassThru = $false,
 		[Parameter(Mandatory=$false)]
@@ -4784,7 +4789,7 @@ Function Execute-ProcessAsUser {
 	</IdleSettings>
 	<AllowStartOnDemand>true</AllowStartOnDemand>
 	<Enabled>true</Enabled>
-	<Hidden>false</Hidden>
+	<Hidden>$Hidden</Hidden>
 	<RunOnlyIfIdle>false</RunOnlyIfIdle>
 	<WakeToRun>false</WakeToRun>
 	<ExecutionTimeLimit>PT72H</ExecutionTimeLimit>
